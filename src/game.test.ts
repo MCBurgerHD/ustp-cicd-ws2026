@@ -29,7 +29,7 @@ describe('createBoard', () => {
 });
 
 describe('createPiece', () => {
-  it.each(ALL_TYPES)('spawns %s at the top, horizontally centered', (type) => {
+  it.each(ALL_TYPES)('spawns %s at the top, horizontally centered', (type: PieceType) => {
     const piece = createPiece(type);
     expect(piece.type).toBe(type);
     expect(piece.y).toBe(0);
