@@ -24,3 +24,10 @@ jobs:
 
       - name: Build application
         run: npm run build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: vector-blocks-webapp
+          path: dist/
+          if-no-files-found: error
