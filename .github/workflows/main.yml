@@ -8,7 +8,12 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    name: Build & test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
 
     steps:
       - name: Checkout
@@ -25,9 +30,20 @@ jobs:
       - name: Build application
         run: npm run build
 
+      - name: Run unit tests
+        run: npm run test:ci
+
+      - name: Upload test results
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.os }}
+          path: test-results/
+          if-no-files-found: error
+
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: vector-blocks-webapp
+          name: vector-blocks-webapp-${{ matrix.os }}
           path: dist/
           if-no-files-found: error
