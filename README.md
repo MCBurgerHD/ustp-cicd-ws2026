@@ -29,3 +29,5 @@ npm run preview
 | Restart after game over | Enter |
 
 On small screens, use the touch controls below the board. The game includes a seven-piece randomizer, a ghost piece, a hold slot, a five-piece preview, level progression, and a locally saved high score.
+
+settings updated
